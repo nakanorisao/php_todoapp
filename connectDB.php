@@ -1,6 +1,6 @@
 <?php
 
-Class connectDatabase
+class connectDatabase
 {
     protected $table_name;
 
