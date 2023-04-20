@@ -47,7 +47,7 @@ Class connectDatabase
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if(!$result){
-                exit('Todoがありません');
+                exit('TODOがありません');
             }
             $dbh = null;
             return $result;

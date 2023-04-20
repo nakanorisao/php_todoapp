@@ -1,7 +1,6 @@
 <?php
 require_once('connectDB.php');
 
-// 共通化できなさそうなものをdbcから移してくる
 Class createTodo extends connectDatabase
 {
     protected $table_name = 'todo_post';

@@ -9,7 +9,7 @@
 <body>
     <table>
         <tr>
-            <th>No</th>
+            <th>No.</th>
             <th>タイトル</th>
             <th>内容</th>
             <th>投稿日時</th>
