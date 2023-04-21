@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>新規作成</h2>
-    <form action="post.php" method="POST">
+    <form action="controller.php" method="POST">
         <p>タイトル：</p>
         <input type="text" name="title">
         <p>本文：</p>

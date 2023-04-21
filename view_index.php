@@ -1,8 +1,9 @@
 <?php
-require_once('createTodo.php');
+require_once('controller.php');
 
-$todos = new createTodo('post_todo');
-$todoData = $todos->getAll();
+$todos = new controller('post_todo');
+$todos->index();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@ $todoData = $todos->getAll();
     <title>todo</title>
 </head>
 <body>
-<a href="form.php">新規作成</a>
+<a href="view_new.php">新規作成</a>
     <table>
         <tr>
             <th>タイトル</th>
@@ -22,13 +23,14 @@ $todoData = $todos->getAll();
             <th>投稿日時</th>
             <th>更新日時</th>
         </tr>
-        <?php foreach($todos->getAll() as $column){ ?>
+        <?php foreach($todos->index() as $column){ ?>
         <tr>
-            <td><a href="/php_todoapp/update_form.php?id=<?php if(isset($column)){echo $column['id'];} ?>">
+            <td><a href="/php_todoapp/view_update_form.php?id=<?php if(isset($column)){echo $column['id'];} ?>">
                 <?php if(isset($column)){echo $column['title'];} ?></a></td>
             <td><?php if(isset($column)){echo $column['content'];} ?></td>
             <td><?php if(isset($column)){echo $column['created_at'];} ?></td>
             <td><?php if(isset($column)){echo $column['updated_at'].PHP_EOL;}  ?></td>
+            <td><a href="/php_todoapp/controller.php?id=<?php if(isset($column)){echo $column['id'];}?>">削除</a></td>
         </tr>
     </table>  
     <?php } ?>

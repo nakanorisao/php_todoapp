@@ -1,13 +1,14 @@
 <?php 
-require_once('createTodo.php');
 
-$todo = new createTodo('post_todo');
-$result = $todo->getById($_GET['id']);
+require_once('controller.php');
 
-$id = $result['id'];
-$title = $result['title'];
-$content = $result['content'];
+// 4/21作業中
+// $todo = new controller('post_todo');
+// $todo->update($_GET['id']);
 
+// $id = $result['id'];
+// $title = $result['title'];
+// $content = $result['content'];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ $content = $result['content'];
 </head>
 <body>
     <h2>編集</h2>
-    <form action="todo_update.php" method="POST">
+    <form action="controller.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id ?>">
         <p>タイトル：</p>
         <input type="text" name="title" value="<?php echo $title ?>">
