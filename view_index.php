@@ -30,7 +30,7 @@ $todos->index();
             <td><?php if(isset($column)){echo $column['content'];} ?></td>
             <td><?php if(isset($column)){echo $column['created_at'];} ?></td>
             <td><?php if(isset($column)){echo $column['updated_at'].PHP_EOL;}  ?></td>
-            <td><a href="/php_todoapp/controller.php?id=<?php if(isset($column)){echo $column['id'];}?>">削除</a></td>
+            <td><a href="/php_todoapp/delete_done.php?id=<?php if(isset($column)){echo $column['id'];}?>">削除</a></td>
         </tr>
     </table>  
     <?php } ?>

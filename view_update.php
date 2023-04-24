@@ -2,13 +2,12 @@
 
 require_once('controller.php');
 
-// 4/21作業中
-// $todo = new controller('post_todo');
-// $todo->update($_GET['id']);
+$todo = new controller('post_todo');
+$result = $todo->setID($_GET['id']);
+$id = isset($result['id']) ? $result['id'] : '';
+$title = isset($result['title']) ? $result['title'] : '';
+$content = isset($result['content']) ? $result['content'] : '';
 
-// $id = $result['id'];
-// $title = $result['title'];
-// $content = $result['content'];
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +22,7 @@ require_once('controller.php');
     <h2>編集</h2>
     <form action="controller.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id ?>">
+        <input type="hidden" name="action" value="create">
         <p>タイトル：</p>
         <input type="text" name="title" value="<?php echo $title ?>">
         <p>本文：</p>

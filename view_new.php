@@ -9,6 +9,7 @@
 <body>
     <h2>新規作成</h2>
     <form action="controller.php" method="POST">
+        <input type="hidden" name="action" value="create">
         <p>タイトル：</p>
         <input type="text" name="title">
         <p>本文：</p>

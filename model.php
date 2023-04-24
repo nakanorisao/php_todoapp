@@ -1,9 +1,9 @@
 <?php
 require_once('controller.php');
 
-trait connectDatabase
-{
-    
+// traitをなくしたいけどclassにすると使うときエラーになっちゃう
+trait connectDatabase{
+
     protected function dbConnect(){
         $dsn = 'mysql:host=localhost;dbname=todo;charset=utf8';
         $user = 'root';
@@ -26,7 +26,6 @@ class getPost {
 
     private $table_name;
 
-
     function __construct($table_name){
         $this->table_name = $table_name;
     }
@@ -41,8 +40,7 @@ class getPost {
         return $result;
     }
 
-
-    // テーブルが変わっても、IDから一つとってくる
+    // IDから一つとってくる
     public function getById($id) {
         if(empty($id)){
         exit('idが不正です');
@@ -62,8 +60,6 @@ class getPost {
 
 }
 
-
-
 class createPost {
     use connectDatabase;
     
@@ -73,25 +69,22 @@ class createPost {
         $this->table_name = $table_name;
     }
 
-    public function postCreate($todos){  
+    public function postCreate($post){  
         $dbh = $this->dbConnect();
         $sql = "INSERT INTO `{$this->table_name}`(title, content) VALUES (:title, :content)";
         $dbh->beginTransaction(); 
 
         try{
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':title', $todos['title'] ,PDO::PARAM_STR);
-        $stmt->bindValue(':content', $todos['content'] ,PDO::PARAM_STR);
+        $stmt->bindValue(':title', $post['title'] ,PDO::PARAM_STR);
+        $stmt->bindValue(':content', $post['content'] ,PDO::PARAM_STR);
         $stmt->execute();
         $dbh->commit(); 
-        echo 'Todoを登録しました！';
         } catch(PDOException $e){
          exit($e->getMessage());
         }
     } 
-
 }
-
 
 class updatePost {
     use connectDatabase;
@@ -114,7 +107,6 @@ class updatePost {
         $stmt->bindValue(':id', $post['id'] ,PDO::PARAM_INT);
         $stmt->execute();
         $dbh->commit(); 
-        echo 'Todoを更新しました！';
         } catch(PDOException $e){
          exit($e->getMessage());
         }   
@@ -124,25 +116,26 @@ class updatePost {
 class deletePost{
         use connectDatabase;
         
-        private $table_name;
+    private $table_name;
     
-        function __construct($table_name){
-            $this->table_name = $table_name;
-        }
+    function __construct($table_name){
+        $this->table_name = $table_name;
+    }
 
-        public function postDelete($id){
-            $dbh = $this->dbConnect();
+    public function postDelete($id){
+        $dbh = $this->dbConnect();
+        
+        try {
             $sql = "DELETE FROM `{$this->table_name}` WHERE id = :id";
             $dbh->beginTransaction();
-
-            try {
-                $stmt = $dbh->prepare($sql);
-                $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
-            } catch(PDOException $e){
-                exit($e->getMessage());
-               }   
-        }
-
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+            $stmt->execute();
+            $dbh->commit(); 
+        } catch(PDOException $e){
+            exit($e->getMessage());
+        }   
+    }
 }
 
 
