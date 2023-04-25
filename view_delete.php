@@ -1,8 +1,7 @@
 <?php 
-
 require_once('controller.php');
 
-$todo = new controller('post_todo');
+$todo = new Controller('post_todo');
 $result = $todo->setID($_GET['id']);
 $id = isset($result['id']) ? $result['id'] : '';
 $title = isset($result['title']) ? $result['title'] : '';

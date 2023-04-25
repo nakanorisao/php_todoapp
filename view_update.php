@@ -1,8 +1,7 @@
 <?php 
-
 require_once('controller.php');
 
-$todo = new controller('post_todo');
+$todo = new Controller('post_todo');
 $result = $todo->setID($_GET['id']);
 $id = isset($result['id']) ? $result['id'] : '';
 $title = isset($result['title']) ? $result['title'] : '';
@@ -22,7 +21,7 @@ $content = isset($result['content']) ? $result['content'] : '';
     <h2>編集</h2>
     <form action="controller.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id ?>">
-        <input type="hidden" name="action" value="create">
+        <input type="hidden" name="action" value="update">
         <p>タイトル：</p>
         <input type="text" name="title" value="<?php echo $title ?>">
         <p>本文：</p>

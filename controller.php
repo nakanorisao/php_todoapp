@@ -1,8 +1,7 @@
 <?php
-
 require_once('model.php');
 
-class controller{
+class Controller{
 
     private $post;
     
@@ -10,14 +9,6 @@ class controller{
         $this->post = $post;
     }
 
-    // これを下記メソッドにどうやって適用する？
-    public function sanitize($post){
-        $post = htmlspecialchars($str,ENT_QUOTES,'UTF-8');
-        return $post;
-    }
-
-
-    //TODOのバリデーション：未完成
     public function todoValidate(){
         if(empty($this->post['title'])){
             exit('タイトルを入力してください');
@@ -36,19 +27,16 @@ class controller{
         return $indexdata;  
     }
 
-  
      public function update($post){
          $update = new updatePost('post_todo');
          $updatedata = $update->postUpdate($post);
          return $updatedata;
     }
 
-    
     public function setID($id){
         $setid = new getPost('post_todo');
         $iddata = $setid->getById($id);
         return $iddata;
-
     }
 
     public function delete($id){
@@ -62,14 +50,11 @@ class controller{
         $createdata = $create->postCreate($post);
         return $createdata;
     }
-
-
 }
 
 
 $post = $_POST;
-$controller = new controller($post);
-
+$controller = new Controller($post);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 新規作成フォームからの送信処理
@@ -98,11 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: view_index.php");
 
   }else {
-    // GETリクエストの場合は何もしない
+    header("Location: view_index.php");
   }
   
 }
 
 
 
-?>
